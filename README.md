@@ -1,5 +1,7 @@
 # gh-otify
-
+<p align="center">
+  <img src="https://github.com/CultureLinux/gh-otify/tree/develop/images/gh-otify.png?raw=true" alt="gh-otify"/>
+</p>
 ## Description
 
 ## Install 
