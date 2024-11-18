@@ -6,6 +6,7 @@ class GitHubReleases:
         self.token = token
         self.projects = projects
         self.path = history_path
+        self.notifs = {}
         
     def setUrl(self,github_project):
         self.base_url = f"https://api.github.com/repos/{github_project}/tags"
@@ -41,6 +42,11 @@ class GitHubReleases:
 
         full_info = f"[{tag}] from {xtr_release_author} {xtr_release_author_email} at {xtr_release_date}"
         print(full_info)
+
+        if project not in self.notifs:
+            self.notifs[project] = []
+
+        self.notifs[project].append(tag)
 
         tracking_file = open(f"{self.path}/{project.replace('/','-')}", "a")
         tracking_file.write(full_info+"\n")
@@ -91,7 +97,7 @@ class GitHubReleases:
                     print(f"Erreur {response.status_code}: {response.text}")
                     break
 
-            
+        return self.notifs    
 
     def display_releases(self):
         releases = self.get_all_releases()
