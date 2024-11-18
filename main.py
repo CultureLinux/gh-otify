@@ -35,7 +35,7 @@ if discord_channel != '' and discord_token != '' and len(all_notifs) > 0:
 
     for proj, tag in all_notifs.items():
         print(f"[{proj}] {tag}")
-        discord.notif(f"**{proj}**\n> nouveau tag détecté {tag}\n [Lien GitHub](https://api.github.com/repos/{proj}/tags)")
+        discord.notif(proj,tag)
 
 
 else:
