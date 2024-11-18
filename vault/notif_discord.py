@@ -7,7 +7,7 @@ class NotifDiscord:
         self.channel = channel
 
     
-    def notif(self,message):
+    def notif(self,projet,tags):
         intents = discord.Intents.default()
         bot = commands.Bot(command_prefix="!", intents=intents)
         @bot.event
@@ -15,7 +15,17 @@ class NotifDiscord:
             print(f"Connecté en tant que {bot.user}")
             channel = bot.get_channel(self.channel)
             if channel:
-                await channel.send(message)
+
+                for tag in tags:
+                    embed = discord.Embed(
+                        title=f"**{projet}**",  # Titre en gras
+                        description=f"> Un nouveau tag *{tag}* vient d'apparaitre !\n",
+                        color=discord.Color.green()  # Couleur de l'embed
+                    )
+                    
+                    embed.add_field(name="Retrouvez les changes ici", value=f"[Github](https://github.com/{projet}/releases/tag/{tag}).", inline=False)
+
+                    await channel.send(embed=embed)
             else:
                 print("Channel introuvable")
             await bot.close()  # Arrête le bot après avoir envoyé le message

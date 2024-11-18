@@ -734,3 +734,8 @@
 [pmm-6401-v1.44.0] from Aliaksandr Valialkin valyala@gmail.com at 2020-10-13T15:37:48Z
 [pmm-6401-v1.43.0] from Aliaksandr Valialkin valyala@gmail.com at 2020-10-06T16:07:38Z
 [pmm-6401-high-cpu-usage-fix] from Aliaksandr Valialkin valyala@gmail.com at 2021-03-09T09:51:21Z
+[v1.106.1] from f41gh7 nik@victoriametrics.com at 2024-11-15T22:38:06Z
+[v1.106.1-cluster] from f41gh7 nik@victoriametrics.com at 2024-11-15T22:38:16Z
+[v1.102.7] from f41gh7 nik@victoriametrics.com at 2024-11-18T13:33:04Z
+[v1.97.12] from f41gh7 nik@victoriametrics.com at 2024-11-18T13:33:04Z
+[pmm-6401-v1.106.1] from f41gh7 nik@victoriametrics.com at 2024-11-18T14:09:17Z
