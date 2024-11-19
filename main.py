@@ -21,25 +21,39 @@ history_path = "tracking"
 discord_token = os.getenv("DISCORD_BOT_TOKEN", "")
 discord_channel = int(os.getenv("DISCORD_CHANNEL_IDS", ""))
 
+bsky_account = os.getenv("BSKY_ACCOUNT", "")
+bsky_password = os.getenv("BSKY_PASSWORD", "")
+
+
+
 
 pprint.pprint(projects)
 
 gh_release = GitHubReleases(github_token,projects,history_path)
 all_notifs = gh_release.get_all_releases()
 
+if len(all_notifs) > 0:
 
-if discord_channel != '' and discord_token != '' and len(all_notifs) > 0:
-    print('Discord notification detected')
-    from vault.notif_discord import NotifDiscord
-    discord = NotifDiscord(discord_token,discord_channel)
+    if discord_channel != '' and discord_token != '':
+        print('Discord notification detected')
+        from vault.notif_discord import NotifDiscord
+        discord = NotifDiscord(discord_token,discord_channel)
 
-    for proj, tag in all_notifs.items():
-        print(f"[{proj}] {tag}")
-        discord.notif(proj,tag)
+        for proj, tag in all_notifs.items():
+            print(f"[{proj}] {tag}")
+            discord.notif(proj,tag)
 
+    if bsky_account != "" and bsky_password != "" :
+        print('Bsky notification detected')
+        from vault.notif_bsky import NotifBsky
+        bsky = NotifBsky(bsky_account,bsky_password)
+
+        for proj, tag in all_notifs.items():
+            print(f"[{proj}] {tag}")
+            bsky.post(proj,tag)
 
 else:
-    print("no notif and/or no discord configuration")
+    print("no notifications")
 
 print("--" * 30)
 
