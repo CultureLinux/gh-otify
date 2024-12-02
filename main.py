@@ -24,6 +24,10 @@ discord_channel = int(os.getenv("DISCORD_CHANNEL_IDS", ""))
 bsky_account = os.getenv("BSKY_ACCOUNT", "")
 bsky_password = os.getenv("BSKY_PASSWORD", "")
 
+x_api_key = os.getenv("API_KEY", "")
+x_api_secret = os.getenv("API_SECRET", "")
+x_access_token = os.getenv("ACCESS_TOKEN", "")
+x_access_secret = os.getenv("ACCESS_SECRET", "")
 
 
 #from vault.notif_bsky import NotifBsky
@@ -64,6 +68,15 @@ if len(all_notifs) > 0 and send_notification == True:
         for proj, tag in all_notifs.items():
             print(f"[{proj}] {tag}")
             bsky.post(proj,tag)
+
+    if x_api_key != "" and x_api_secret != "" and x_access_token != "" and x_access_secret != "":
+        print('Bsky notification detected')
+        from vault.notif_x import NotifX
+        x = NotifX(bsky_account,bsky_password)
+
+        for proj, tag in all_notifs.items():
+            print(f"[{proj}] {tag}")
+            x.post(proj,tag)
 
 else:
     print("no notifications")
