@@ -14,7 +14,7 @@ load_dotenv()
 
 github_token = os.getenv("GITHUB_TOKEN", "")
 
-projets_raw = os.getenv("PROJECTS", "")  # Valeur par défaut si la variable est absente
+projets_raw = os.getenv("PROJECTS", "")
 projects = projets_raw.split(",") if projets_raw else []
 history_path = "tracking"
 
@@ -26,13 +26,26 @@ bsky_password = os.getenv("BSKY_PASSWORD", "")
 
 
 
+#from vault.notif_bsky import NotifBsky
+#bsky = NotifBsky(bsky_account,bsky_password)
+#bsky.test("Aujourd'hui ca va tomber #snow")
+#quit()
+###########################
+### VARS
+##########################
+
+send_notification = True
+
+###########################
+### EXEC
+##########################
 
 pprint.pprint(projects)
 
-gh_release = GitHubReleases(github_token,projects,history_path)
-all_notifs = gh_release.get_all_releases()
+gh_crawler = GitHubReleases(github_token,projects,history_path)
+all_notifs = gh_crawler.get_all_releases()
 
-if len(all_notifs) > 0:
+if len(all_notifs) > 0 and send_notification == True:
 
     if discord_channel != '' and discord_token != '':
         print('Discord notification detected')

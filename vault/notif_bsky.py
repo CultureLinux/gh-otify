@@ -8,11 +8,11 @@ class NotifBsky:
         self.client = Client()
         self.client.login(bsky_account, bsky_password)
 
-    def test (self,message,placeholder_url,url):
+    def test (self,message):
 
         tb = client_utils.TextBuilder()
         tb.text(message)
-        tb.link(url, url)
+        #tb.link(url, url)
         tb.text(' .')
 
         self.client.send_post(tb)
