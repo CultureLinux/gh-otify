@@ -70,9 +70,9 @@ if len(all_notifs) > 0 and send_notification == True:
             bsky.post(proj,tag)
 
     if x_api_key != "" and x_api_secret != "" and x_access_token != "" and x_access_secret != "":
-        print('Bsky notification detected')
+        print('X notification detected')
         from vault.notif_x import NotifX
-        x = NotifX(bsky_account,bsky_password)
+        x = NotifX(x_api_key,x_api_secret,x_access_token,x_access_secret)
 
         for proj, tag in all_notifs.items():
             print(f"[{proj}] {tag}")

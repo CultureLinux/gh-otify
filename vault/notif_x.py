@@ -1,6 +1,6 @@
 import tweepy
 
-class NotifBsky:
+class NotifX:
     def __init__ (self,x_api_key,x_api_secret,x_access_token,x_access_secret):
         auth = tweepy.OAuthHandler(x_api_key, x_api_secret)
         auth.set_access_token(x_access_token, x_access_secret)
