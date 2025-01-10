@@ -24,22 +24,18 @@ discord_channel = int(os.getenv("DISCORD_CHANNEL_IDS", ""))
 bsky_account = os.getenv("BSKY_ACCOUNT", "")
 bsky_password = os.getenv("BSKY_PASSWORD", "")
 
-x_api_key = os.getenv("API_KEY", "")
-x_api_secret = os.getenv("API_SECRET", "")
-x_access_token = os.getenv("ACCESS_TOKEN", "")
-x_access_secret = os.getenv("ACCESS_SECRET", "")
+x_bearer_token = os.getenv("X_BEARER_TOKEN", "")
+x_api_key = os.getenv("X_API_KEY", "")
+x_api_secret = os.getenv("X_API_SECRET", "")
+x_access_token = os.getenv("X_ACCESS_TOKEN", "")
+x_access_secret = os.getenv("X_ACCESS_SECRET", "")
 
-
-#from vault.notif_bsky import NotifBsky
-#bsky = NotifBsky(bsky_account,bsky_password)
-#bsky.test("Aujourd'hui ca va tomber #snow")
-#quit()
 ###########################
 ### VARS
 ##########################
 
 send_notification = True
-
+send_notification = False
 ###########################
 ### EXEC
 ##########################
@@ -69,7 +65,7 @@ if len(all_notifs) > 0 and send_notification == True:
             print(f"[{proj}] {tag}")
             bsky.post(proj,tag)
 
-    if x_api_key != "" and x_api_secret != "" and x_access_token != "" and x_access_secret != "":
+    if x_api_key != "" and x_api_secret != "" and x_access_token != "" and x_access_secret != "" and x_bearer_token != "": 
         print('X notification detected')
         from vault.notif_x import NotifX
         x = NotifX(x_api_key,x_api_secret,x_access_token,x_access_secret)
