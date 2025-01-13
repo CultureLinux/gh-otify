@@ -12,6 +12,7 @@ This script monitors GitHub repositories for new tags or releases and sends noti
 - Notifications:
   - **Discord**: Sends messages to a specific channel.
   - **Bluesky (Bsky)**: Posts notifications to a Bluesky account.
+  - **Gotify**: Posts notifications on gotify.
 - Keeps track of previously detected tags to avoid duplicate notifications.
 
 ## Prerequisites
@@ -20,6 +21,7 @@ This script monitors GitHub repositories for new tags or releases and sends noti
 - A GitHub token to access the GitHub API.
 - A Discord account (with a bot and a configured channel if using Discord notifications).
 - A Bluesky account (if using Bluesky notifications).
+- A gotify token 
 
 ## Install 
 ### Os packages
