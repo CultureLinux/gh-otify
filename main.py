@@ -14,7 +14,7 @@ load_dotenv()
 
 github_token = os.getenv("GITHUB_TOKEN", "")
 
-projets_raw = os.getenv("PROJECTS", "")  # Valeur par défaut si la variable est absente
+projets_raw = os.getenv("PROJECTS", "")
 projects = projets_raw.split(",") if projets_raw else []
 history_path = "tracking"
 
@@ -24,15 +24,28 @@ discord_channel = int(os.getenv("DISCORD_CHANNEL_IDS", ""))
 bsky_account = os.getenv("BSKY_ACCOUNT", "")
 bsky_password = os.getenv("BSKY_PASSWORD", "")
 
+x_bearer_token = os.getenv("X_BEARER_TOKEN", "")
+x_api_key = os.getenv("X_API_KEY", "")
+x_api_secret = os.getenv("X_API_SECRET", "")
+x_access_token = os.getenv("X_ACCESS_TOKEN", "")
+x_access_secret = os.getenv("X_ACCESS_SECRET", "")
 
+###########################
+### VARS
+##########################
 
+send_notification = True
+send_notification = False
+###########################
+### EXEC
+##########################
 
 pprint.pprint(projects)
 
-gh_release = GitHubReleases(github_token,projects,history_path)
-all_notifs = gh_release.get_all_releases()
+gh_crawler = GitHubReleases(github_token,projects,history_path)
+all_notifs = gh_crawler.get_all_releases()
 
-if len(all_notifs) > 0:
+if len(all_notifs) > 0 and send_notification == True:
 
     if discord_channel != '' and discord_token != '':
         print('Discord notification detected')
@@ -51,6 +64,15 @@ if len(all_notifs) > 0:
         for proj, tag in all_notifs.items():
             print(f"[{proj}] {tag}")
             bsky.post(proj,tag)
+
+    if x_api_key != "" and x_api_secret != "" and x_access_token != "" and x_access_secret != "" and x_bearer_token != "": 
+        print('X notification detected')
+        from vault.notif_x import NotifX
+        x = NotifX(x_api_key,x_api_secret,x_access_token,x_access_secret)
+
+        for proj, tag in all_notifs.items():
+            print(f"[{proj}] {tag}")
+            x.post(proj,tag)
 
 else:
     print("no notifications")
