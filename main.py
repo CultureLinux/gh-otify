@@ -35,7 +35,8 @@ x_access_secret = os.getenv("X_ACCESS_SECRET", "")
 ##########################
 
 send_notification = True
-send_notification = False
+#send_notification = False
+
 ###########################
 ### EXEC
 ##########################
